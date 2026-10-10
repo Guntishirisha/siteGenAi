@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SiteGen AI Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0f1a;--p1:#121a2b;--p2:#1a2438;--ln:#26324a;--tx:#f3efe6;--mu:#93a0b8;--ac:#ff5a1f;--ok:#3ddc97;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f5f1e8;--p1:#ffffff;--p2:#efe9dc;--ln:#ddd5c3;--tx:#111827;--mu:#5b6474;--ok:#12805c}}
+:root[data-theme="light"]{--bg:#f5f1e8;--p1:#ffffff;--p2:#efe9dc;--ln:#ddd5c3;--tx:#111827;--mu:#5b6474;--ok:#12805c}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font-family:Inter,system-ui,Arial,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+button,input,textarea,select{font:inherit;color:inherit}button{cursor:pointer}
+.top{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--ln);background:var(--p1);flex-wrap:wrap}
+.logo{font:700 20px 'Space Grotesk',sans-serif;margin-right:8px}.logo b{color:var(--ac)}
+#name{background:transparent;border:1px solid transparent;border-radius:8px;padding:7px 10px;font-weight:600;width:200px}#name:hover,#name:focus{border-color:var(--ln);outline:0}
+.sp{flex:1}
+.btn{border:1px solid var(--ln);background:var(--p2);border-radius:10px;padding:8px 13px;font-weight:600;font-size:14px;transition:.15s}
+.btn:hover:not(:disabled){border-color:var(--ac);transform:translateY(-1px)}.btn:disabled{opacity:.4;cursor:default}
+.btn.p{background:var(--ac);border-color:var(--ac);color:#111827}
+select.btn{padding:8px 10px}
+.seg{display:flex;border:1px solid var(--ln);border-radius:10px;overflow:hidden}.seg button{border:0;background:transparent;padding:8px 11px;font-size:14px}.seg button.on{background:var(--ac);color:#111827}
+.grp{display:contents}body.land .wo{display:none}.vd{font-size:11px;font-weight:700;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--ln)}.vd.convert{background:var(--ok);color:#111827}.vd.hesitate{background:#f5b301;color:#111827}.vd.leave{background:#ff5a1f;color:#111827}#tb{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;gap:4px;z-index:2;background:var(--p1);border:1px solid var(--ln);border-radius:999px;padding:5px;box-shadow:0 8px 30px #0006}#tb button{border:0;background:transparent;border-radius:999px;padding:7px 13px;font-size:12.5px;font-weight:600}#tb button:hover{background:var(--p2)}.tab{font-size:13px}.tg{display:flex;align-items:center;gap:10px}.sw2{width:44px;height:24px;border-radius:12px;background:var(--ln);position:relative;border:0;flex:none}.sw2.on{background:var(--ok)}.sw2 i{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s}.sw2.on i{left:23px}.tab{padding:13px 2px;font-size:12.5px}a.sm{display:block;text-decoration:none;padding:9px 10px}.th2{margin:30px 0 12px;font:700 18px 'Space Grotesk',sans-serif;text-align:left}.tpl{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.tp{border:1px solid var(--ln);background:var(--p1);border-radius:16px;overflow:hidden;text-align:left;padding:0;transition:.15s}.tp:hover{border-color:var(--ac);transform:translateY(-3px)}.tp .pv{height:92px}.tp b{display:block;padding:10px 12px 0}.tp span{display:block;padding:0 12px 12px;font-size:12.5px;color:var(--mu)}body.foc .chat,body.foc .insp{display:none}body.foc #ws{grid-template-columns:1fr}
+/* landing */
+#land{flex:1;overflow:auto;position:relative;display:grid;place-items:center;padding:40px 20px}
+body:not(.land) #land{display:none}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;animation:fl 12s ease-in-out infinite alternate;pointer-events:none}
+.o1{width:480px;height:480px;background:var(--ac);left:-120px;top:-100px}.o2{width:420px;height:420px;background:#6d5cff;right:-100px;bottom:-80px;animation-delay:-5s}
+@keyframes fl{to{transform:translate(60px,40px) scale(1.15)}}
+.lw{position:relative;max-width:860px;width:100%;text-align:center}
+.eye{font-size:13px;font-weight:700;letter-spacing:4px;color:var(--ac)}
+.lw h1{font:700 clamp(40px,7vw,76px)/1.04 'Space Grotesk',sans-serif;margin:14px 0}.lw h1 em{font-style:normal;color:var(--ac)}
+.lw>p{color:var(--mu);font-size:19px;margin:0 auto 28px;max-width:600px}
+.comp{background:var(--p1);border:1px solid var(--ln);border-radius:20px;padding:14px;text-align:left;box-shadow:0 20px 60px #0005}
+.comp textarea,.cin textarea{width:100%;background:transparent;border:0;resize:none;outline:0;font-size:17px;height:84px;padding:6px}
+.cr{display:flex;gap:8px;align-items:center}
+.egs{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:18px}
+.eg{text-align:left;background:var(--p1);border:1px solid var(--ln);border-radius:14px;padding:14px;font-size:14px;color:var(--tx);transition:.15s}.eg:hover{border-color:var(--ac);transform:translateY(-2px)}.eg span{display:block;font-size:26px;margin-bottom:6px}
+.bd{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:22px}.bd i{font-style:normal;font-size:13px;color:var(--mu);border:1px solid var(--ln);border-radius:999px;padding:6px 12px}
+/* workspace */
+#ws{flex:1;display:grid;grid-template-columns:330px 1fr 340px;min-height:0}
+body.land #ws{display:none}
+.chat,.insp{display:flex;flex-direction:column;min-height:0;background:var(--p1)}.chat{border-right:1px solid var(--ln)}.insp{border-left:1px solid var(--ln)}
+.msgs{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:90%;padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.45;white-space:pre-wrap;animation:in .25s}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.m.u{align-self:flex-end;background:var(--ac);color:#111827;border-bottom-right-radius:4px}.m.a{align-self:flex-start;background:var(--p2);border-bottom-left-radius:4px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 8px}.chips button{border:1px solid var(--ln);background:transparent;border-radius:999px;padding:6px 11px;font-size:12.5px;color:var(--mu)}.chips button:hover{border-color:var(--ac);color:var(--tx)}
+.cin{border-top:1px solid var(--ln);padding:10px 12px;display:flex;flex-direction:column;gap:6px}.cin textarea{height:56px;font-size:14px;background:var(--p2);border-radius:10px;padding:10px}
+.canvas{position:relative;background:var(--bg);padding:16px;min-width:0;display:flex;justify-content:center;align-items:stretch}
+.canvas .fr{width:100%;max-width:100%;transition:width .3s;display:flex}.canvas iframe{flex:1;border:1px solid var(--ln);border-radius:14px;background:#fff;min-height:0;box-shadow:0 12px 40px #0004}
+#pipe{position:absolute;inset:16px;border-radius:14px;background:var(--p1);display:none;place-items:center;z-index:3}#pipe.on{display:grid}
+#pipe ol{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;font-size:18px}
+#pipe li{display:flex;gap:12px;align-items:center;color:var(--mu);transition:.3s}#pipe li i{width:26px;height:26px;border-radius:50%;border:2px solid var(--ln);display:grid;place-items:center;font-style:normal;font-size:14px}
+#pipe li.on{color:var(--tx)}#pipe li.on i{border-color:var(--ac);animation:pl 1s infinite}#pipe li.done{color:var(--tx)}#pipe li.done i{background:var(--ok);border-color:var(--ok);color:#111827}
+@keyframes pl{50%{box-shadow:0 0 0 6px #ff5a1f33}}
+.tabs{display:flex;border-bottom:1px solid var(--ln)}.tab{flex:1;border:0;background:none;padding:13px 6px;font-weight:600;color:var(--mu);border-bottom:3px solid transparent}.tab.on{color:var(--tx);border-color:var(--ac)}
+.ib{flex:1;overflow:auto;padding:14px}
+.card{background:var(--p2);border:1px solid var(--ln);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px}
+.r{display:flex;gap:6px;align-items:center}.tag{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--mu);text-transform:uppercase}
+.card input,.card textarea,.pop input{background:var(--bg);border:1px solid var(--ln);border-radius:8px;padding:8px 10px;width:100%}.card textarea{resize:vertical;min-height:64px}
+.sm{border:1px solid var(--ln);background:var(--bg);border-radius:8px;padding:3px 9px;font-size:12.5px;font-weight:600}.sm:hover{border-color:var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.sw{height:44px;border-radius:10px;border:2px solid var(--ln);font-size:10px;font-weight:700;display:grid;place-items:end center;padding-bottom:3px}.sw.on{border-color:var(--ac)}
+h4{margin:14px 0 8px;font-size:12px;letter-spacing:1.5px;color:var(--mu);text-transform:uppercase}
+.opt{display:flex;gap:6px}.opt button{flex:1;border:1px solid var(--ln);background:var(--p2);border-radius:9px;padding:8px;font-size:13px}.opt button.on{border-color:var(--ac);background:#ff5a1f22}
+.cp{display:flex;gap:8px}.cp label{flex:1;font-size:12px;color:var(--mu);display:flex;flex-direction:column;gap:4px}.cp input{width:100%;height:34px;border:1px solid var(--ln);border-radius:8px;background:none;padding:2px}
+.ring{width:140px;height:140px;border-radius:50%;display:grid;place-items:center;margin:4px auto 16px}.ring div{width:108px;height:108px;border-radius:50%;background:var(--p1);display:grid;place-items:center;font:700 40px 'Space Grotesk',sans-serif;line-height:1;text-align:center}.ring small{display:block;font:500 12px Inter;color:var(--mu)}
+.bar{height:8px;border-radius:4px;background:var(--ln);overflow:hidden;margin:6px 0 3px}.bar i{display:block;height:100%;background:var(--ac);transition:width .5s}.ci small{color:var(--mu);font-size:12.5px}
+.pop{position:fixed;right:16px;top:64px;width:340px;max-width:calc(100% - 32px);background:var(--p1);border:1px solid var(--ln);border-radius:14px;padding:16px;box-shadow:0 16px 50px #0006;z-index:9;display:none;flex-direction:column;gap:8px;font-size:14px}.pop.on{display:flex}.pop .it{padding:8px;border:1px solid var(--ln);border-radius:8px;cursor:pointer}.pop .it:hover{border-color:var(--ac)}
+body.ro .chat,body.ro .insp,body.ro .rm{display:none}body.ro #ws{grid-template-columns:1fr}
+@media(max-width:1100px){body{overflow:auto}#ws{grid-template-columns:1fr;grid-auto-rows:auto}.canvas{height:70vh}.chat{height:380px}.insp{height:480px}}
+</style></head>
+<body class="land">
+<header class="top"><div class="logo">SiteGen <b>AI</b></div><span class="tag wo" id="hl"></span>
+<input id="name" class="wo rm" value="Untitled site" aria-label="Project name">
+<div class="sp"></div>
+<span class="wo rm grp"><button class="btn" id="focus" title="Focus mode">⛶</button><button class="btn" id="thm" title="Switch studio theme">◐</button><button class="btn" id="undo" title="Undo (Ctrl+Z)" disabled>↶</button><button class="btn" id="redo" title="Redo" disabled>↷</button>
+<div class="seg" id="dev"><button data-w="100%" class="on" title="Desktop">🖥</button><button data-w="820px" title="Tablet">▭</button><button data-w="390px" title="Mobile">📱</button></div>
+<select class="btn" id="lang" title="AI translate"><option value="">🌐 Translate</option><option>English</option><option>Telugu</option><option>Hindi</option><option>Tamil</option><option>Spanish</option><option>French</option><option>German</option></select>
+<button class="btn" id="projBtn">Projects</button><button class="btn" id="saveBtn">Save</button><button class="btn" id="expBtn">Export</button><button class="btn p" id="shareBtn">Share link</button></span>
+</header>
+<div class="pop" id="pop"></div>
+<div id="land"><div class="orb o1"></div><div class="orb o2"></div>
+<div class="lw"><div class="eye">AI WEBSITE STUDIO</div><h1>Describe it.<br><em>Watch it build.</em></h1>
+<p>Layout, copy, design and an MVP score in seconds. Then refine by chat, translate, and share with one link.</p>
+<div class="comp"><textarea id="lin" placeholder="e.g. A cozy South Indian restaurant in Hyderabad with a menu, gallery and table booking details"></textarea>
+<div class="cr"><button class="btn" id="mic" style="display:none">🎤 Speak</button><button class="btn" id="enh">✨ Enhance prompt</button><div class="sp"></div><button class="btn p" id="lgo">Generate website →</button></div></div>
+<div class="egs" id="egs"></div><h3 class="th2">Or start from a template</h3><div class="tpl" id="tpl"></div>
+<div class="bd"><i>Chat editing</i><i>Design Lab</i><i>AI translation</i><i>MVP score</i><i>Undo history</i><i>Export + share</i></div></div></div>
+<div id="ws"><aside class="chat"><div class="msgs" id="msgs"></div><div class="chips" id="chips"></div>
+<div class="cin"><textarea id="inp" placeholder="Ask for a change… e.g. make the hero bolder"></textarea><div class="r"><button class="btn" id="mic2" style="display:none">🎤</button><div class="sp"></div><button class="btn p" id="send">Send</button></div></div></aside>
+<main class="canvas"><div class="fr" id="fr"><iframe id="pf" sandbox="" title="Website preview"></iframe></div><div id="pipe"><ol id="pol"></ol></div><div id="tb"></div></main>
+<aside class="insp"><div class="tabs"><button class="tab on" data-t="sec">Sections</button><button class="tab" data-t="des">Design</button><button class="tab" data-t="sco">Score</button><button class="tab" data-t="lab">Lab</button><button class="tab" data-t="trust">Trust</button><button class="tab" data-t="ship">Deploy</button></div><div class="ib" id="ib"></div></aside></div>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const S={guard:true,ledger:[],brief:'',tt:null,stage:null,spec:null,id:null,tab:'sec',busy:false,msgs:[],past:[],future:[],name:'Untitled site',sample:null,db:null,dl:null,uid:null};
+const TY='hero|about|features|gallery|stats|pricing|testimonials|faq|contact';
+const SCHEMA=`Return ONLY valid JSON (no markdown): {"title":str,"theme":{"primary":"#hex","bg":"#hex","text":"#hex","font":"sans|serif|mono","radius":14,"space":1},"sections":[{"type":"${TY}","heading":str,"body":str,"items":[{"title":str,"text":str}],"cta":str}]}. Use 6-8 sections: hero first, contact last. Write specific, vivid, realistic copy with a clear brand voice (no lorem ipsum, no generic filler). Hero needs a cta label. features/gallery/pricing/testimonials/faq need 3-4 items; stats items use title as the number (e.g. "12k+") and text as the label; contact items use titles Email, Phone, Address with plausible fictional values. Pick a distinctive palette with text/background contrast of at least 4.5:1.`;
+const EG=[['🍽️','Restaurant with menu, gallery and contact'],['📸','Portfolio for a wedding photographer'],['💪','Landing page for a fitness tracking app'],['🏥','Modern dental clinic with booking info'],['🚀','SaaS startup landing page with pricing'],['🎉','Event page for a college tech fest']];
+const PRE=[['Sunset','#ff5a1f','#fffaf5','#1a1a1a'],['Ocean','#0e7490','#f0fbff','#0b2530'],['Forest','#166534','#f4faf5','#10241a'],['Midnight','#8b5cf6','#0f1020','#ecebff'],['Noir','#facc15','#0b0b0b','#f5f5f5'],['Rose','#e11d48','#fff5f7','#2a0a12'],['Mono','#111827','#ffffff','#111827'],['Sand','#b45309','#faf5ea','#2b2112'],['Coral','#f43f5e','#fff7f5','#2b1215'],['Lime','#65a30d','#fbfdf4','#1a2305'],['Indigo','#4338ca','#f5f6ff','#14163a'],['Teal','#0d9488','#f2fdfb','#06312d'],['Slate','#475569','#f8fafc','#0f172a'],['Gold','#ca8a04','#fffdf2','#2a2003'],['Berry','#a21caf','#fdf4ff','#2e0a33'],['Carbon','#22d3ee','#0a0f14','#e8f7fb']];
+const CHIPS=['Make copy bolder','Add an FAQ section','Add pricing','More professional tone','Add stats section','Shorten all text'];
+const lum=h=>{const[r,g,b]=[1,3,5].map(i=>{const v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*r+.7152*g+.0722*b};
+const cr=(a,b)=>{const x=lum(a),y=lum(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05)},onC=h=>lum(h)>.4?'#111827':'#ffffff';
+function norm(sp){const t=sp.theme||{},hx=(v,d)=>/^#[0-9a-f]{6}$/i.test(v||'')?v:d;
+ sp.theme={primary:hx(t.primary,'#ff5a1f'),bg:hx(t.bg,'#ffffff'),text:hx(t.text,'#111827'),font:['serif','mono'].includes(t.font)?t.font:'sans',radius:[4,14,28].includes(+t.radius)?+t.radius:14,space:[.7,1,1.35].includes(+t.space)?+t.space:1,art:['none','waves','grid','rays','peaks'].includes(t.art)?t.art:'blobs'};
+ sp.title=sp.title||'My website';sp.sections=(sp.sections||[]).map(s=>({type:TY.split('|').includes(s.type)?s.type:'about',heading:s.heading||'',body:s.body||'',items:Array.isArray(s.items)?s.items:[],cta:s.cta||''}));return sp}
+function site(sp){const t=sp.theme,bt=onC(t.primary),F={sans:'system-ui,Arial,sans-serif',serif:'Georgia,serif',mono:'ui-monospace,Menlo,monospace'}[t.font];
+ const G=(a,fn)=>`<div class="g">${a.map(fn).join('')}</div>`;
+ const sec=s=>{const h=`<h2>${esc(s.heading)}</h2>`,p=s.body?`<p class="lead">${esc(s.body)}</p>`:'',I=s.items;
+ switch(s.type){
+ case'hero':return `<header class="hero"><h1>${esc(s.heading)}</h1><p>${esc(s.body)}</p>${s.cta?`<a class="b" href="#contact">${esc(s.cta)}</a>`:''}</header>`;
+ case'gallery':return `<section>${h}${p}${G(I,(x,i)=>`<div class="tile" style="background:${ART(['waves','peaks','blobs','rays','grid'][i%5],t.primary,bt)} center/cover,linear-gradient(${40+i*47}deg,${t.primary},${t.primary}66)"><span>${esc(x.title)}</span></div>`)}</section>`;
+ case'stats':return `<section class="st">${h}${G(I,x=>`<div class="n"><b>${esc(x.title)}</b><span>${esc(x.text)}</span></div>`)}</section>`;
+ case'pricing':return `<section>${h}${p}${G(I,(x,i)=>`<div class="c ${i==1?'hl':''}"><h3>${esc(x.title)}</h3><p>${esc(x.text)}</p></div>`)}</section>`;
+ case'faq':return `<section>${h}${I.map(x=>`<details class="c"><summary>${esc(x.title)}</summary><p>${esc(x.text)}</p></details>`).join('')}</section>`;
+ case'testimonials':return `<section>${h}${G(I,x=>`<blockquote class="c">“${esc(x.text)}”<footer>— ${esc(x.title)}</footer></blockquote>`)}</section>`;
+ case'contact':return `<section id="contact">${h}${p}<ul>${I.map(x=>`<li><b>${esc(x.title)}</b> ${esc(x.text)}</li>`).join('')}</ul></section>`;
+ default:return `<section>${h}${p}${I.length?G(I,x=>`<div class="c"><h3>${esc(x.title)}</h3><p>${esc(x.text)}</p></div>`):''}</section>`}};
+ return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${esc((sp.sections[0]?.body||'').slice(0,155))}"><title>${esc(sp.title)}</title><style>
+*{box-sizing:border-box}body{margin:0;background:${t.bg};color:${t.text};font-family:${F};line-height:1.65}
+section{padding:calc(70px*${t.space}) 7%;max-width:1120px;margin:0 auto}h1,h2,h3{line-height:1.12}h2{font-size:clamp(26px,4vw,40px);margin:0 0 14px}.lead{font-size:18px;opacity:.85;max-width:680px}
+.hero{background:${ART(t.art,t.primary,bt)} center/cover no-repeat,radial-gradient(circle at 85% 10%,#ffffff44,transparent 45%),radial-gradient(circle at 0 100%,#00000033,transparent 50%),${t.primary};color:${bt};padding:calc(120px*${t.space}) 7%;text-align:center}
+.hero h1{font-size:clamp(36px,7vw,68px);margin:0 auto 18px;max-width:900px;animation:r .8s both}.hero p{max-width:640px;margin:0 auto 30px;font-size:20px;animation:r .8s .15s both}.hero .b{animation:r .8s .3s both}
+@keyframes r{from{opacity:0;transform:translateY(18px)}}@media(prefers-reduced-motion){*{animation:none!important}}
+.b{display:inline-block;background:${bt};color:${t.primary};padding:15px 30px;border-radius:${t.radius*2}px;text-decoration:none;font-weight:700}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:26px}
+.c{border:1px solid ${t.text}2a;border-radius:${t.radius}px;padding:22px;margin:0 0 12px;background:${t.text}08}.c h3{margin:0 0 6px}.c p{margin:0}.hl{border:2px solid ${t.primary};background:${t.primary}14}
+summary{font-weight:700;cursor:pointer}details p{margin-top:8px}
+.tile{min-height:180px;border-radius:${t.radius}px;display:flex;align-items:flex-end;padding:18px;color:${bt};font-weight:700}
+.n{text-align:center}.n b{display:block;font-size:clamp(34px,5vw,56px);color:${t.primary}}ul{list-style:none;padding:0}li{padding:7px 0}li b{display:inline-block;min-width:80px}
+.f{text-align:center;padding:32px;opacity:.65}blockquote footer{margin-top:10px;font-weight:700}
+</style></head><body>${sp.sections.map(sec).join('')}<div class="f">© ${esc(sp.title)}</div></body></html>`}
+function score(sp){const s=sp.sections,t=sp.theme,h=s[0],ct=s.find(x=>x.type==='contact');
+ const cats=[
+ {n:'Structure',w:15,f:((h?.type==='hero')+(s.length>=6)+!!ct)/3,h:'Start with a hero, use 6+ sections, end with contact.'},
+ {n:'Content depth',w:20,f:s.filter(x=>x.heading&&(x.type==='gallery'||x.body.length>=40||x.items.length>=2)).length/Math.max(s.length,1),h:'Some sections are thin. Regenerate or expand them.'},
+ {n:'Call to action',w:10,f:h?.cta?1:0,h:'Add a clear call-to-action button to the hero.'},
+ {n:'Accessibility',w:20,f:Math.min(1,cr(t.bg,t.text)/4.5),h:'Text/background contrast is under 4.5:1.'},
+ {n:'SEO basics',w:15,f:((sp.title.length>=10&&sp.title.length<=60)+((h?.body.length||0)>=50)+s.every(x=>x.heading))/3,h:'Use a 10-60 character title, a descriptive hero and headings everywhere.'},
+ {n:'Contact info',w:10,f:(ct?.items.length||0)>=2?1:ct?.5:0,h:'Add email and phone to the contact section.'},
+ {n:'Responsive layout',w:10,f:1,h:''}];
+ return{cats,total:Math.round(cats.reduce((a,c)=>a+c.w*c.f,0))}}
+function msg(r,t,h){S.msgs.push({r,t,h});$('#msgs').innerHTML=S.msgs.map(m=>m.h?`<div class="m ${m.r}">${m.h}</div>`:`<div class="m ${m.r}">${esc(m.t)}</div>`).join('');$('#msgs').scrollTop=1e9}
+async function ai(p){if(!S.sample)throw new Error('AI backend unavailable.');return S.sample.json([{role:'user',content:p}],{cache:false})}
+let pt;const pv=()=>{clearTimeout(pt);pt=setTimeout(()=>requestAnimationFrame(()=>{if(S.spec)$('#pf').srcdoc=site(S.spec)}),120)};
+const push=()=>{S.past.push(JSON.stringify(S.spec));if(S.past.length>30)S.past.shift();S.future=[];hb()};
+const hb=()=>{$('#undo').disabled=!S.past.length;$('#redo').disabled=!S.future.length};
+function undo(){if(!S.past.length)return;S.future.push(JSON.stringify(S.spec));S.spec=JSON.parse(S.past.pop());all();hb()}
+function redo(){if(!S.future.length)return;S.past.push(JSON.stringify(S.spec));S.spec=JSON.parse(S.future.pop());all();hb()}
+function all(){pv();insp()}
+function pipe(on){const st=['Understanding your idea','Planning the layout','Writing the content','Choosing a design','Scoring quality'];$('#pipe').classList.toggle('on',on);if(!on){clearInterval(S.pi);return}
+ let i=0;const d=()=>{$('#pol').innerHTML=st.map((x,k)=>`<li class="${k<i?'done':k==i?'on':''}"><i>${k<i?'✓':''}</i>${x}</li>`).join('')};d();S.pi=setInterval(()=>{if(i<st.length-1){i++;d()}},2400)}
+function enter(){document.body.classList.remove('land');$('#chips').innerHTML=CHIPS.map(c=>`<button>${c}</button>`).join('')}
+async function gen(text){text=text.trim();if(!text||S.busy)return;S.busy=true;enter();msg('u',text);msg('a','Building your website…');pipe(true);
+ try{S.spec=norm(await ai(`${SCHEMA}\nUser request: ${text}`));S.past=[];S.future=[];hb();S.name=S.spec.title;S.lab=S.kit=S.tt=null;S.brief=text;S.ledger=[];$('#name').value=S.name;S.msgs.pop();
+  msg('a',`Done! "${S.spec.title}" has ${S.spec.sections.length} sections. Tweak it in chat, try the Design tab, then test it with the Audience Lab.`);S.tab='sec';all();tabs()}
+ catch(e){S.msgs.pop();msg('a','That failed: '+(e.message||e.code||'unknown error')+'. Please try again.');if(!S.spec)document.body.classList.add('land')}
+ pipe(false);S.busy=false}
+async function mut(instr,label){if(!S.spec||S.busy)return;S.busy=true;push();msg('u',label||instr);msg('a','Working…');
+ try{S.spec=norm(await ai(`${SCHEMA}\nCurrent site JSON: ${JSON.stringify(S.spec)}\nApply this change and return the FULL updated JSON. Keep everything else unchanged: ${instr}`));S.msgs.pop();const old=JSON.parse(S.past[S.past.length-1]),nx=S.spec,d=diff(old,nx);S.spec=old;
+if(d.none){S.past.pop();hb();msg('a','⚠ Self-check: I found no real change in the site, so I applied nothing. Try rephrasing.')}
+else if(S.guard&&d.level!=='low'){S.past.pop();hb();S.stage={nx,d,instr};msg('a','',guardCard(d))}
+else{S.spec=nx;rec(d,instr,'auto');all()}}
+ catch(e){S.past.pop();hb();S.msgs.pop();msg('a','Could not apply that: '+(e.message||e.code))}S.busy=false}
+async function regen(i){if(S.busy)return;S.busy=true;push();const s=S.spec.sections[i];msg('a',`Rewriting "${s.heading}"…`);
+ try{const r=await ai(`Site: ${JSON.stringify({title:S.spec.title,theme:S.spec.theme})}\nRewrite this section with fresh, specific content of the same type and similar length. Return ONLY the JSON object {"type","heading","body","items":[{"title","text"}],"cta"}.\n${JSON.stringify(s)}`);
+  S.spec.sections[i]=norm({theme:S.spec.theme,sections:[r]}).sections[0];S.msgs.pop();msg('a','Section rewritten.');all()}catch(e){S.past.pop();hb();S.msgs.pop();msg('a','Could not rewrite: '+(e.message||e.code))}S.busy=false}
+function insp(){if(!S.spec)return;const r=score(S.spec),t=S.spec.theme,B=$('#ib');$('#tb').innerHTML=`<button data-go="trust">🛡 Guardian ${S.guard?'ON':'OFF'}</button><button data-go="trust">🔎 Honesty ${hs()===null?'unchecked':hs()+'%'}</button><button data-go="sco">★ ${r.total}/100</button>`;$('#shareBtn').dataset.s=r.total;
+ if(S.tab==='sec'){B.innerHTML=S.spec.sections.map((s,i)=>`<div class="card"><div class="r"><span class="tag">${s.type}</span><div class="sp"></div><button class="sm" data-a="up" data-i="${i}">↑</button><button class="sm" data-a="dn" data-i="${i}">↓</button><button class="sm" data-a="rg" data-i="${i}">↻ AI</button><button class="sm" data-a="rm" data-i="${i}">✕</button></div><input data-f="heading" data-i="${i}" value="${esc(s.heading)}" aria-label="Heading"><textarea data-f="body" data-i="${i}" aria-label="Body">${esc(s.body)}</textarea>${s.items.length?`<span class="tag">${s.items.length} items · edit via chat</span>`:''}</div>`).join('')+`<div class="r" style="flex-wrap:wrap">${['faq','pricing','stats','testimonials','gallery'].map(x=>`<button class="sm" data-add="${x}">+ ${x}</button>`).join('')}</div>`}
+ else if(S.tab==='des'){B.innerHTML=`<h4 style="margin-top:0">Palette</h4><div class="grid">${PRE.map(p=>`<button class="sw ${t.primary===p[1]&&t.bg===p[2]?'on':''}" data-p="${p[0]}" style="background:linear-gradient(135deg,${p[2]} 50%,${p[1]} 50%);color:${p[3]}">${p[0]}</button>`).join('')}</div>
+ <h4>Custom colors</h4><div class="cp"><label>Accent<input type="color" data-c="primary" value="${t.primary}"></label><label>Background<input type="color" data-c="bg" value="${t.bg}"></label><label>Text<input type="color" data-c="text" value="${t.text}"></label></div>
+ <h4>Typography</h4><div class="opt">${['sans','serif','mono'].map(f=>`<button data-k="font" data-v="${f}" class="${t.font==f?'on':''}">${f}</button>`).join('')}</div>
+ <h4>Hero art</h4><div class="opt" style="flex-wrap:wrap">${['blobs','waves','grid','rays','peaks','none'].map(a=>`<button data-k="art" data-v="${a}" class="${t.art==a?'on':''}">${a}</button>`).join('')}</div><h4>AI palette</h4><div class="card"><input id="mood" placeholder="e.g. calm ocean sunrise"><button class="sm" id="pal">Generate palette</button></div><h4>Corners</h4><div class="opt">${[['Sharp',4],['Soft',14],['Round',28]].map(([n,v])=>`<button data-k="radius" data-v="${v}" class="${t.radius==v?'on':''}">${n}</button>`).join('')}</div>
+ <h4>Spacing</h4><div class="opt">${[['Compact',.7],['Normal',1],['Airy',1.35]].map(([n,v])=>`<button data-k="space" data-v="${v}" class="${t.space==v?'on':''}">${n}</button>`).join('')}</div>`}
+ else if(S.tab==='ship'){const slug=(S.name||'site').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'my-site',h=hs(),ph=/\[add|yourname|example\.com|555|XXXX/i.test(JSON.stringify(S.spec)),ck=[[r.total>=70,'MVP score is '+r.total+' (needs 70+)'],[h!==null&&h>=70,h===null?'Run TruthTrace first':'Honesty is '+h+'% (needs 70+)'],[!ph,ph?'Placeholder details still present':'No placeholder details found'],[!S.stage,S.stage?'An AI change awaits approval':'No change awaiting approval']];B.innerHTML=`<div class="card"><b>🚀 Deploy gate</b>${ck.map(([ok,t])=>`<div class="r"><span class="vd ${ok?'convert':'leave'}">${ok?'pass':'fix'}</span><span>${esc(t)}</span></div>`).join('')}</div><div class="card"><b>One-prompt Git deploy</b><span class="tag">Creates the repo, pushes, enables GitHub Pages</span><input id="repo" value="${slug}" aria-label="Repository name"><button class="btn p" id="dnow">Deploy to GitHub now</button><button class="btn" id="dep">Download deploy.sh</button><span class="tag">Needs git and GitHub CLI. Run: bash deploy.sh</span></div><div class="card"><b>Other hosts</b><a class="sm" href="https://app.netlify.com/drop" target="_blank" rel="noopener">Netlify Drop (drag the exported HTML)</a><a class="sm" href="https://vercel.com/new" target="_blank" rel="noopener">Vercel</a><a class="sm" href="https://github.com/new" target="_blank" rel="noopener">New GitHub repository</a></div>`}
+ else if(S.tab==='trust'){const T=S.tt,bad=T?T.claims.filter(c=>c.status!=='grounded'):[];B.innerHTML=`<div class="card"><div class="tg"><div style="flex:1"><b>🛡 Permission Guardian</b><br><span class="tag">Risky AI edits need your approval</span></div><button class="sw2 ${S.guard?'on':''}" data-gt aria-label="Toggle Guardian"><i></i></button></div></div><div class="card"><b>🔎 TruthTrace</b><span class="tag">The AI audits its own claims against your brief</span>${T?`<b style="font:700 34px 'Space Grotesk'">${hs()}% honest</b>`:''}<button class="btn p" id="tt">${T?'Re-check':"Catch my AI's lies"}</button></div>`+bad.map(c=>`<div class="card"><div class="r"><span class="vd ${VC[c.status]}">${esc(c.status)}</span><span class="tag">${esc(c.section)}</span></div><b>${esc(c.text)}</b><span>${esc(c.why)}</span><span class="tag">Safer: ${esc(c.safe)}</span></div>`).join('')+(bad.length?'<button class="btn" id="fixtt" style="width:100%;margin-bottom:12px">Fix unverified claims</button>':'')+'<h4>AI action ledger</h4>'+(S.ledger.length?S.ledger.slice().reverse().map(l=>`<div class="card"><div class="r"><span class="vd ${VC[l.h]}">${l.h}</span><span class="vd ${VC[l.lv]}">${l.lv}</span><div class="sp"></div><span class="tag">${new Date(l.t).toLocaleTimeString()}</span></div><span>${esc(l.a)}</span></div>`).join(''):'<span class="tag">No AI actions yet</span>')}
+ else if(S.tab==='lab'){const L=S.lab,K=S.kit;B.innerHTML=`<div class="card"><b>Audience Lab</b><span class="tag">AI-simulated visitors test your site</span><button class="btn p" id="lab">${L?'Test again':'Test with 3 visitors'}</button></div>`+(L?L.personas.map(p=>`<div class="card"><div class="r"><b>${esc(p.name)}</b><div class="sp"></div><span class="vd ${esc(p.verdict)}">${esc(p.verdict)}</span></div><span class="tag">${esc(p.who)}</span><span>${esc(p.friction)}</span></div>`).join('')+'<button class="btn" id="fixall" style="width:100%;margin-bottom:12px">Apply all fixes</button>':'')+`<div class="card"><b>Launch Kit</b><span class="tag">Ready-to-post content</span><button class="btn p" id="kit">Generate launch kit</button></div>`+(K?[['WhatsApp message','whatsapp'],['Instagram caption','instagram'],['Google Business description','google'],['SEO meta description','meta']].map(([n,k])=>`<div class="card"><span class="tag">${n}</span><textarea readonly>${esc(K[k])}</textarea><button class="sm" data-copy="${k}">Copy</button></div>`).join(''):'')}
+ else B.innerHTML=`<div class="ring" style="background:conic-gradient(var(--ac) ${r.total*3.6}deg,var(--ln) 0)"><div>${r.total}<small>MVP score</small></div></div>${r.cats.map(c=>`<div class="ci"><div class="r"><b>${c.n}</b><div class="sp"></div><span>${Math.round(c.w*c.f)}/${c.w}</span></div><div class="bar"><i style="width:${c.f*100}%"></i></div><small>${c.f<1?c.h:'Looks good'}</small></div>`).join('<div style="height:10px"></div>')}<button class="btn p" style="width:100%;margin-top:16px" id="fix" ${r.total>=100?'disabled':''}>Improve score with AI</button>`}
+function tabs(){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.t===S.tab));insp()}
+document.addEventListener('click',e=>{const q=s=>e.target.closest(s);let x;
+ if(x=q('.tab')){S.tab=x.dataset.t;return tabs()}
+ if(x=q('#dev button')){document.querySelectorAll('#dev button').forEach(b=>b.classList.toggle('on',b===x));$('#fr').style.width=x.dataset.w;$('#fr').style.margin='0 auto';return}
+ if(x=q('[data-a]')){const i=+x.dataset.i,a=x.dataset.a,L=S.spec.sections;if(a==='rg')return regen(i);push();if(a==='rm')L.splice(i,1);else if(a==='up'&&i>0)[L[i-1],L[i]]=[L[i],L[i-1]];else if(a==='dn'&&i<L.length-1)[L[i+1],L[i]]=[L[i],L[i+1]];return all()}
+ if(x=q('[data-add]'))return mut(`Add a new "${x.dataset.add}" section in a sensible position (before contact).`,'Add '+x.dataset.add+' section');
+ if(x=q('[data-p]')){const p=PRE.find(p=>p[0]===x.dataset.p);push();Object.assign(S.spec.theme,{primary:p[1],bg:p[2],text:p[3]});return all()}
+ if(x=q('[data-k]')){push();S.spec.theme[x.dataset.k]=['font','art'].includes(x.dataset.k)?x.dataset.v:+x.dataset.v;return all()}
+ if(q('#fix')){const w=score(S.spec).cats.filter(c=>c.f<1).map(c=>c.h).join(' ');return mut('Improve the MVP score. Fix: '+w,'Improve my MVP score')}
+ if(x=q('[data-g]')){const g=S.stage;if(!g)return;S.stage=null;if(x.dataset.g==='ok'){push();S.spec=g.nx;rec(g.d,g.instr,'approved');all()}else{S.ledger.push({t:Date.now(),a:String(g.instr).slice(0,70),lv:g.d.level,h:'rejected'});msg('a','Rejected. Nothing was changed.');insp()}return}
+if(q('#tt'))return runTT();if(q('#fixtt')){const b=S.tt.claims.filter(c=>c.status!=='grounded');return mut('Replace these unverified claims with honest placeholders or safe wording: '+b.map(c=>`"${c.text}" => ${c.safe}`).join('; '),'TruthTrace: fix unverified claims')}
+if(q('[data-gt)]'.replace(')',''))){S.guard=!S.guard;return insp()}if(x=q('[data-go]')){S.tab=x.dataset.go;return tabs()}
+if(x=q('.tp'))return loadTpl(+x.dataset.i);if(q('#dnow'))return dnow();if(q('#dep'))return depl();if(q('#pal')){const v=$('#mood').value.trim();return v&&mut(`Change ONLY the theme colors (primary, bg, text) to match this mood: "${v}". Keep text/background contrast at least 4.5:1.`)}
+if(q('#lab'))return runLab();if(q('#kit'))return runKit();if(q('#fixall'))return mut('Apply these visitor-driven fixes: '+S.lab.personas.map(p=>p.fix).join(' | '),'Apply Audience Lab fixes');if(x=q('[data-copy]')){try{navigator.clipboard.writeText(S.kit[x.dataset.copy]);x.textContent='Copied'}catch{}return}
+ if(x=q('.chips button'))return mut(x.textContent);
+ if(x=q('.eg'))return gen(x.dataset.t)});
+document.addEventListener('input',e=>{const f=e.target.dataset.f;if(f){S.spec.sections[+e.target.dataset.i][f]=e.target.value;pv()}else if(e.target.dataset.c){S.spec.theme[e.target.dataset.c]=e.target.value;pv()}});
+document.addEventListener('focusin',e=>{if(e.target.dataset.f||e.target.dataset.c)push()});
+document.addEventListener('change',e=>{if(e.target.dataset.c)insp()});
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='z'&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){e.preventDefault();e.shiftKey?redo():undo()}});
+const VC={grounded:'convert',invented:'leave',risky:'hesitate',low:'convert',medium:'hesitate',high:'leave',approved:'convert',rejected:'leave',auto:'convert'},RX=/guarantee|cure|100%|best in|#1|certified|clinically|lawsuit|legal|medical|diagnos|refund|₹|\$|price/i;
+const hs=()=>S.tt?Math.round(100*S.tt.claims.filter(c=>c.status==='grounded').length/Math.max(S.tt.claims.length,1)):null;
+function diff(a,b){const A=a.sections,B=b.sections,d={chg:[],add:[],del:[],flags:[]},ct=x=>JSON.stringify(x.sections.find(s=>s.type==='contact')?.items||[]),nm=s=>s.heading||s.type;
+ if(A.length===B.length)B.forEach((s,i)=>{if(JSON.stringify(s)!==JSON.stringify(A[i]))d.chg.push(nm(s))});
+ else{const k=s=>s.type+'|'+s.heading,ak=new Set(A.map(k)),bk=new Set(B.map(k));B.forEach(s=>{if(!ak.has(k(s)))d.add.push(nm(s))});A.forEach(s=>{if(!bk.has(k(s)))d.del.push(nm(s))})}
+ const txt=B.filter(s=>d.chg.includes(nm(s))||d.add.includes(nm(s))).map(s=>JSON.stringify(s)).join(' ');
+ if(RX.test(txt))d.flags.push('Sensitive wording (pricing, guarantees, legal or health claims)');if(ct(a)!==ct(b))d.flags.push('Contact details changed');if(d.del.length)d.flags.push('Removes content');
+ d.none=!d.chg.length&&!d.add.length&&!d.del.length&&JSON.stringify(a.theme)===JSON.stringify(b.theme)&&a.title===b.title;
+ d.level=(d.del.length||ct(a)!==ct(b))?'high':(d.flags.length||d.chg.length+d.add.length>2)?'medium':'low';return d}
+const guardCard=d=>`<b>🛡 Permission Guardian</b><br>The AI wants to change: ${esc(d.chg.concat(d.add.map(x=>'+'+x),d.del.map(x=>'-'+x)).join(', ')||'theme')}<br><span class="vd ${VC[d.level]}">${d.level} risk</span>${d.flags.map(f=>`<br>• ${esc(f)}`).join('')}<div class="r" style="margin-top:8px"><button class="sm" data-g="ok">Approve</button><button class="sm" data-g="no">Reject</button></div>`;
+function rec(d,i,h){S.ledger.push({t:Date.now(),a:String(i).slice(0,70),lv:d.level,h});msg('a',`✓ Verified by diff, not by my word. Changed: ${d.chg.join(', ')||'none'}. Added: ${d.add.join(', ')||'none'}. Removed: ${d.del.join(', ')||'none'}.`)}
+async function runTT(){if(S.busy)return;S.busy=true;$('#tt').textContent='Auditing…';try{const r=await ai(`You are a strict fact-checker auditing website copy an AI wrote. The user's original brief: "${S.brief}". Site JSON: ${JSON.stringify(S.spec)}. List up to 12 verifiable factual claims (numbers, prices, years, awards, certifications, statistics, addresses, phone or email, superlatives, health or legal promises). Label each status: "grounded" (stated or clearly implied by the brief), "invented" (the AI made it up), or "risky" (could mislead or create liability). Return ONLY JSON {"claims":[{"text":str,"section":str,"status":"grounded|invented|risky","why":str,"safe":str (honest replacement such as a placeholder like [add your real phone number])}]}`);S.tt=Array.isArray(r.claims)?r:null}catch(e){showPop('<b>TruthTrace failed</b><span>'+esc(e.message||e.code)+'</span>')}S.busy=false;insp()}
+const ART=(k,p,c)=>{const f=c+'33',g=c+'22',P={blobs:`<circle cx='1000' cy='120' r='260' fill='${f}'/><circle cx='120' cy='520' r='200' fill='${g}'/><circle cx='700' cy='560' r='90' fill='${f}'/>`,waves:`<path d='M0 420C300 340 500 520 800 430S1200 360 1200 360V600H0Z' fill='${f}'/><path d='M0 500C300 430 600 580 900 500S1200 470 1200 470V600H0Z' fill='${g}'/>`,grid:`<g stroke='${f}' stroke-width='2'>${[...Array(13)].map((_,i)=>`<path d='M${i*100} 0V600M0 ${i*50}H1200'/>`).join('')}</g>`,rays:`<g fill='${g}'>${[...Array(8)].map((_,i)=>`<path d='M600 700L${i*180-100} 0L${i*180+20} 0Z'/>`).join('')}</g>`,peaks:`<path d='M0 600L220 300L380 470L600 200L850 480L1000 340L1200 600Z' fill='${f}'/><path d='M0 600L300 420L520 560L760 380L1200 600Z' fill='${g}'/>`}[k];return P?`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600' preserveAspectRatio='xMidYMid slice'>${P}</svg>`)}")`:'none'};
+function deploySh(r){return `#!/usr/bin/env bash
+# SiteGen AI auto-deploy: creates a GitHub repo, pushes the site, enables GitHub Pages.
+set -e
+REPO="${r}"
+command -v git >/dev/null || { echo 'Install git first'; exit 1; }
+command -v gh >/dev/null || { echo 'Install GitHub CLI: https://cli.github.com'; exit 1; }
+gh auth status >/dev/null 2>&1 || gh auth login
+mkdir -p "$REPO/.github/workflows" && cd "$REPO"
+cat > index.html <<'SITEGEN_HTML'
+${site(S.spec)}
+SITEGEN_HTML
+cat > .github/workflows/pages.yml <<'SITEGEN_YML'
+name: Deploy to GitHub Pages
+on: { push: { branches: [main] }, workflow_dispatch: {} }
+permissions: { contents: read, pages: write, id-token: write }
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: \${{ steps.d.outputs.page_url }} }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: . }
+      - id: d
+        uses: actions/deploy-pages@v4
+SITEGEN_YML
+git init -q -b main && git add -A && git commit -qm 'Deploy site generated by SiteGen AI'
+gh repo create "$REPO" --public --source=. --push
+USER=$(gh api user -q .login)
+gh api -X POST "repos/$USER/$REPO/pages" -f build_type=workflow >/dev/null 2>&1 || true
+echo "Deployed! Live in about a minute: https://$USER.github.io/$REPO/"
+`}
+async function depl(){const rp=($('#repo').value||'my-site').toLowerCase().replace(/[^a-z0-9-]+/g,'-'),sh=deploySh(rp);try{if(!S.dl)throw 0;await S.dl.save({filename:'deploy.sh',data:sh});showPop('<b>deploy.sh saved</b><span>Run <b>bash deploy.sh</b> in a terminal. It creates the repo, pushes your site and enables GitHub Pages.</span>')}catch(e){if(e&&e.code==='declined')return;try{await navigator.clipboard.writeText(sh);showPop('<b>Script copied</b><span>Paste it into a file named deploy.sh, then run bash deploy.sh.</span>')}catch{showPop('<b>Download unavailable</b><span>Allow downloads for this page and try again.</span>')}}}
+const I=(...a)=>a.map(([title,text])=>({title,text})),T=(p,b,t,f)=>({primary:p,bg:b,text:t,font:f,radius:14,space:1,art:'blobs'}),CT=I(['Email','[add your email]'],['Phone','[add your phone]'],['Address','[add your address]']);
+const TPL=[
+{n:'Restaurant',d:'Menu, gallery, booking',s:{title:'Spice and Smoke Kitchen',theme:T('#b45309','#faf5ea','#2b2112','serif'),sections:[{type:'hero',heading:'Slow-cooked flavours, served fresh',body:'Hyderabadi classics and modern plates made with local ingredients. Come hungry.',cta:'Reserve a table'},{type:'about',heading:'Our story',body:'We started with one family recipe and a big stove. Every dish is still cooked slowly, in small batches, with spices ground in-house.'},{type:'features',heading:'Signature dishes',items:I(['Dum Biryani','Fragrant rice slow-cooked with tender meat.'],['Haleem','Rich, slow-simmered and comforting.'],['Mirchi Ka Salan','Peanut and chilli curry, perfect with rice.'],['Double Ka Meetha','Golden bread pudding with saffron.'])},{type:'gallery',heading:'From our kitchen',items:I(['The dining room'],['Fresh spices'],['Chef at work'],['Dessert table'])},{type:'testimonials',heading:'Guests say',items:I(['A regular','Add a real guest review here.'],['A food blogger','Add a real review here.'],['A family','Add a real review here.'])},{type:'contact',heading:'Book your table',body:'Open daily for lunch and dinner.',items:CT}]}},
+{n:'Portfolio',d:'Work, skills, contact',s:{title:'Aarav Designs',theme:T('#8b5cf6','#0f1020','#ecebff','sans'),sections:[{type:'hero',heading:'I design and build for the web',body:'Final year student and freelance developer crafting clean, fast websites and apps.',cta:'See my work'},{type:'about',heading:'About me',body:'I enjoy turning rough ideas into polished products. I work across design, front-end and APIs, and I love hackathons.'},{type:'features',heading:'What I do',items:I(['Web apps','React and Node.js products.'],['UI design','Clear, accessible interfaces.'],['AI features','Chatbots and smart tools.'])},{type:'gallery',heading:'Selected work',items:I(['Campus Connect'],['Smart Attendance'],['Plant Monitor'],['AI Site Builder'])},{type:'stats',heading:'At a glance',items:I(['8.5','CGPA'],['4','Projects'],['2','Internships'],['5','Hackathons'])},{type:'contact',heading:'Let us talk',body:'Open to internships and full-time roles.',items:CT}]}},
+{n:'SaaS startup',d:'Features, pricing, FAQ',s:{title:'TaskFlow',theme:T('#0e7490','#f0fbff','#0b2530','sans'),sections:[{type:'hero',heading:'Ship projects faster with TaskFlow',body:'Plan, track and deliver work in one calm workspace built for small teams.',cta:'Start free'},{type:'features',heading:'Why teams switch',items:I(['Simple boards','Drag tasks across clear stages.'],['Team chat','Discuss work right on the task.'],['Smart reports','See progress without meetings.'])},{type:'stats',heading:'Built for scale',items:I(['[add]','Teams'],['[add]','Tasks done'],['[add]','Countries'])},{type:'pricing',heading:'Simple pricing',items:I(['Free','For individuals. [add details]'],['Pro','For growing teams. [add price]'],['Business','For companies. [add price]'])},{type:'faq',heading:'Questions',items:I(['Is there a free plan?','Add your answer here.'],['Can I cancel anytime?','Add your answer here.'],['Do you offer support?','Add your answer here.'])},{type:'contact',heading:'Talk to us',items:CT}]}},
+{n:'Event page',d:'Schedule, FAQ, register',s:{title:'TechFest 2026',theme:T('#facc15','#0b0b0b','#f5f5f5','mono'),sections:[{type:'hero',heading:'TechFest 2026',body:'Two days of hackathons, talks and workshops for student builders.',cta:'Register now'},{type:'about',heading:'About the event',body:'Join students from across the region to build, learn and network. Add your event details here.'},{type:'stats',heading:'Event highlights',items:I(['[add]','Participants'],['[add]','Speakers'],['[add]','Prize pool'])},{type:'features',heading:'Schedule',items:I(['Day 1','Opening, workshops and hackathon kickoff.'],['Day 2','Demos, judging and awards.'],['Venue','[add venue and timings]'])},{type:'faq',heading:'FAQ',items:I(['Who can join?','Add your answer here.'],['Is there a fee?','Add your answer here.'],['Do I need a team?','Add your answer here.'])},{type:'contact',heading:'Contact organisers',items:CT}]}}];
+function loadTpl(i){const t=TPL[i];S.spec=norm(JSON.parse(JSON.stringify(t.s)));S.brief=t.d;S.name=S.spec.title;$('#name').value=S.name;S.past=[];S.future=[];hb();S.lab=S.kit=S.tt=null;S.ledger=[];enter();msg('a','Loaded the '+t.n+' template. Tell me about your business in chat and I will rewrite it for you, or edit sections directly.');S.tab='sec';all();tabs()}
+async function runLab(){if(S.busy)return;S.busy=true;$('#lab').textContent='Testing…';try{const r=await ai(`Act as 3 simulated website visitors and honestly review this site JSON: (1) a first-time customer on a slow mobile connection, (2) a skeptical shopper comparing competitors, (3) a visitor with low vision. Be critical and specific. Return ONLY JSON {"personas":[{"name":str,"who":str,"verdict":"convert|hesitate|leave","friction":str (one sentence),"fix":str (one concrete change)}]}. Site: ${JSON.stringify(S.spec)}`);S.lab=Array.isArray(r.personas)?r:null}catch(e){showPop('<b>Lab failed</b><span>'+esc(e.message||e.code)+'</span>')}S.busy=false;insp()}
+async function runKit(){if(S.busy)return;S.busy=true;$('#kit').textContent='Writing…';try{S.kit=await ai(`Create launch content for this website for an Indian small-business audience. Return ONLY JSON {"whatsapp":str,"instagram":str,"google":str,"meta":str}. whatsapp: short friendly broadcast with a [LINK] placeholder; instagram: caption plus 5 hashtags; google: Google Business profile description under 750 characters; meta: SEO meta description under 155 characters. Site: ${JSON.stringify(S.spec)}`)}catch(e){showPop('<b>Kit failed</b><span>'+esc(e.message||e.code)+'</span>')}S.busy=false;insp()}
+$('#undo').onclick=undo;$('#redo').onclick=redo;$('#focus').onclick=()=>document.body.classList.toggle('foc');$('#thm').onclick=()=>{const d=document.documentElement;d.dataset.theme=(d.dataset.theme||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark'))==='dark'?'light':'dark'};
+$('#lgo').onclick=()=>gen($('#lin').value);
+$('#send').onclick=()=>{const v=$('#inp').value.trim();if(!v)return;$('#inp').value='';mut(v)};
+$('#inp').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#send').click()}};
+$('#lang').onchange=e=>{const l=e.target.value;e.target.value='';if(l)mut(`Translate ALL human-readable text (title, headings, body, item titles and texts, cta) into ${l}. Keep structure, section types and theme unchanged.`,'Translate to '+l)};
+$('#enh').onclick=async()=>{const v=$('#lin').value.trim();if(!v)return;$('#enh').textContent='✨ Enhancing…';try{const r=await ai(`Rewrite this website idea as a vivid, specific 2-3 sentence brief including business name, audience, tone and the sections it needs. Return ONLY JSON {"brief":str}. Idea: ${v}`);$('#lin').value=r.brief||v}catch(e){showPop('<b>Could not enhance</b><span>'+esc(e.message||e.code)+'</span>')}$('#enh').textContent='✨ Enhance prompt'};
+$('#name').oninput=e=>S.name=e.target.value;
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(SR)['#mic','#mic2'].forEach(id=>{const b=$(id);b.style.display='';b.onclick=()=>{const r=new SR();r.lang='en-IN';const t=id==='#mic'?$('#lin'):$('#inp');b.textContent='● Listening';r.onresult=e=>{t.value=(t.value+' '+e.results[0][0].transcript).trim()};r.onend=()=>b.textContent=id==='#mic'?'🎤 Speak':'🎤';try{r.start()}catch{}}});
+const pop=$('#pop'),showPop=h=>{pop.innerHTML=h;pop.classList.add('on')};
+document.addEventListener('mousedown',e=>{if(!e.target.closest('#pop')&&!e.target.closest('.btn'))pop.classList.remove('on')});
+async function save(){if(!S.db)return showPop('<b>Backend unavailable</b><span>Open this page in claude.ai to save projects.</span>'),false;S.id=S.id||Math.random().toString(36).slice(2,10);
+ try{await S.db.collection('sites').doc(S.id).set({owner:S.uid||'',name:S.name,ledger:JSON.stringify(S.ledger),spec:JSON.stringify(S.spec),score:score(S.spec).total,updated:Date.now()});return true}catch(e){showPop('<b>Could not save</b><span>'+esc(e.message||e.code)+'</span>');return false}}
+$('#saveBtn').onclick=async()=>{if(await save())showPop('<b>Saved</b><span>"'+esc(S.name)+'" is stored in the backend.</span>')};
+$('#shareBtn').onclick=async()=>{if(!await save())return;const l=location.href.split('?')[0].split('#')[0]+'?site='+S.id;try{await navigator.clipboard.writeText(l)}catch{}
+ showPop('<b>Share link ready</b><input readonly value="'+esc(l)+'" onclick="this.select()"><span>Code: <b>'+S.id+'</b>. Anyone in your organization can open it, or use Projects → Open by code.</span>')};
+$('#expBtn').onclick=async()=>{const fn=(S.name||'site').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'.html',h=site(S.spec);
+ try{if(!S.dl)throw 0;await S.dl.save({filename:fn,data:h});showPop('<b>Exported</b><span>'+esc(fn)+' is a complete standalone website.</span>')}catch(e){if(e&&e.code==='declined')return;try{await navigator.clipboard.writeText(h);showPop('<b>HTML copied</b><span>Downloads are unavailable here, so the full HTML is on your clipboard.</span>')}catch{showPop('<b>Export unavailable</b><span>Allow downloads for this page and try again.</span>')}}};
+async function openSite(id,ro){if(!S.db)return;try{const d=await S.db.collection('sites').doc(id.trim()).get();if(!d.exists)return showPop('<b>Not found</b><span>No project with that code.</span>');const v=d.data();S.spec=norm(JSON.parse(v.spec));S.id=d.id;S.name=v.name;$('#name').value=S.name;S.past=[];S.future=[];hb();if(ro)document.body.classList.add('ro');enter();pop.classList.remove('on');S.msgs=[];msg('a','Opened "'+v.name+'".');S.tab='sec';all();tabs()}catch(e){showPop('<b>Could not open</b><span>'+esc(e.message||e.code)+'</span>')}}
+$('#projBtn').onclick=async()=>{let it='';try{const q=await S.db.collection('sites').get();it=q.docs.filter(d=>d.data().owner===S.uid).sort((a,b)=>b.data().updated-a.data().updated).map(d=>`<div class="it" data-o="${d.id}">${esc(d.data().name)} · score ${d.data().score??'–'}</div>`).join('')}catch{}
+ showPop('<b>Your projects</b>'+(it||'<span>No saved projects yet.</span>')+'<input id="code" placeholder="Open by code"><button class="btn" id="go">Open</button>');pop.querySelectorAll('[data-o]').forEach(n=>n.onclick=()=>openSite(n.dataset.o));$('#go').onclick=()=>openSite($('#code').value)};
+$('#tpl').innerHTML=TPL.map((t,i)=>`<button class="tp" data-i="${i}"><div class="pv" style="background:linear-gradient(135deg,${t.s.theme.primary} 50%,${t.s.theme.bg} 50%)"></div><b>${t.n}</b><span>${t.d}</span></button>`).join('');
+$('#egs').innerHTML=EG.map(([i,t])=>`<button class="eg" data-t="${t}"><span>${i}</span>${t}</button>`).join('');
+const API=async(u,o={})=>{const r=await fetch(u,{...o,headers:{'Content-Type':'application/json','x-user':S.uid,...(o.headers||{})}});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j};
+try{S.uid=localStorage.getItem('uid')||(()=>{const v=Math.random().toString(36).slice(2,12);localStorage.setItem('uid',v);return v})()}catch{S.uid='anon'}
+S.sample={json:async m=>(await API('/api/ai',{method:'POST',body:JSON.stringify({messages:m})})).json};
+S.db={collection:()=>({doc:id=>({set:d=>API('/api/sites/'+id,{method:'PUT',body:JSON.stringify(d)}),get:async()=>{try{const v=await API('/api/sites/'+id);return{exists:true,id,data:()=>v}}catch{return{exists:false}}}}),get:async()=>{const l=await API('/api/sites');return{docs:l.map(v=>({id:v._id,data:()=>v}))}}})};
+S.dl={save:async({filename,data})=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'text/plain'}));a.download=filename;a.click()}};
+fetch('/api/health').then(r=>r.json()).then(h=>{$('#hl').textContent='AI '+(h.ai?h.provider:'OFF')+' · DB '+h.db+' · GitHub '+(h.github?'on':'OFF')}).catch(()=>{});
+async function dnow(){const rp=($('#repo').value||'my-site').toLowerCase().replace(/[^a-z0-9-]+/g,'-'),b=$('#dnow');b.textContent='Deploying...';try{const r=await API('/api/deploy',{method:'POST',body:JSON.stringify({repo:rp,html:site(S.spec)})});showPop('<b>Deployed</b><span>Live in about a minute:</span><input readonly value="'+esc(r.url)+'" onclick="this.select()"><a class="sm" href="'+esc(r.url)+'" target="_blank" rel="noopener">Open site</a><a class="sm" href="'+esc(r.repoUrl)+'" target="_blank" rel="noopener">Open repository</a>')}catch(e){showPop('<b>Deploy failed</b><span>'+esc(e.message)+'</span>')}b.textContent='Deploy to GitHub now'}
+{const q=new URLSearchParams(location.search).get('site');if(q)openSite(q,true)}
+
+</script></body></html>
